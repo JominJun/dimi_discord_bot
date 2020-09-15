@@ -1,0 +1,64 @@
+import discord, random, os
+from discord.ext import commands
+
+app = commands.Bot(command_prefix="$", status=discord.Status.online, activity=discord.Game("'$명령어' 대기"))
+token = os.getenv('DISCORD_BOT_DIMI1538_TOKEN')
+caller = ""
+onActivity = ""
+gamble_ans = 0
+
+@app.event
+async def on_ready():
+    print(f"{app.user.name}({app.user.id})의 작동을 시작합니다")
+
+@app.event
+async def on_message(message):
+    await app.process_commands(message)
+    global caller, onActivity, gamble_ans
+    if onActivity == "gamble":
+        if message.content.startswith('*') and caller == message.author:
+            inp = int(str(message.content).split('*')[1])
+            if gamble_ans == inp:
+                await message.channel.send("💥⚜🌟🥇🏆정답이야!🏆🥇🌟⚜💥")
+                caller = ""
+                onActivity = ""
+                gamble_ans = ""
+            elif gamble_ans > inp:
+                await message.channel.send("조금 더 큰 숫자야..")
+            else:
+                await message.channel.send("조금 더 작은 숫자야..")
+
+@app.command()
+async def 명령어(ctx):
+    embed = discord.Embed(color=0xed1280)
+    embed.set_author(name="1538 민소현 명령어", icon_url="https://imgur.com/krJM8Wj.png")
+    embed.add_field(name="$명령어", value="명령어 목록을 보여줄게...ㅎ,,")
+    embed.add_field(name="$소현아", value="내... 이름.. 불러줘...")
+    embed.add_field(name="$도박", value="도.박. 이.거. 진.짜.재.밌.습.니.다.")
+    embed.set_footer(text="개발자: ⭐민소현")
+    await ctx.send(embed=embed)
+
+@app.command()
+async def 소현아(ctx):
+    await ctx.send("혹시,, 나..부른거야...? ...")
+
+@app.command()
+async def 도박(ctx):
+    global caller, onActivity, gamble_ans
+    if onActivity != "gamble":
+        await ctx.send("혹시.. 도박..ㅎㅎ..아 미안...도박 안할래?..\n내가... 숫자(1~100)를 생각할테니까... 맞혀봐...ㅎㅎ\n*[숫자]로 내게 입력해주면 돼...ㅎㅎ\n그만두고 싶으면...'$도박중지'라고 해")
+        caller = ctx.message.author
+        onActivity = "gamble"
+        gamble_ans = random.randint(1, 100)
+    else:
+        await ctx.send("이미 다른곳에서든 도박 중인것 같아.. 끝내고 싶으면 도박을 시작한 사람이 정답을 맞히거나 '$도박중지'를 실행해야 돼..")
+
+@app.command()
+async def 도박중지(ctx):
+    global caller, onActivity, gamble_ans
+    await ctx.send(f"도박을 중단했어... 정답은 {gamble_ans}였는데 아쉽네...ㅎㅎ...")
+    caller = ""
+    onActivity = ""
+    gamble_ans = ""
+
+app.run(token)
