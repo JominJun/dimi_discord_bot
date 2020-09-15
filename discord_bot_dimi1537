@@ -139,23 +139,23 @@ async def 시간표(ctx):
         ["자료구조A", "자료구조A", "수학", "통합사회", "컴퓨터시스템일반", "국어", "영어(전)", "종례"]
     ]
     schedule_link = {
-        "국어": "https://us02web.zoom.us/j/3300965795?pwd=RTBUUXVabnhKM3VRMXh0bE5ZZWpUdz09",
-        "수학": "https://zoom.us/j/7987833794",
-        "통합사회": "https://calendar.google.com/calendar/u/1/r",
-        "통합과학": "https://zoom.us/j/7178015132?pwd=dS9HQUdJNGMyVXk2U25Ra0hrczJLUT09",
-        "영어(공)": "https://zoom.us/j/4700404365?pwd=ckQ4eWNPT2Fxem1mSXpKWCttVEVGQT09",
-        "영어(전)": "https://zoom.us/j/7385237525",
-        "컴퓨터시스템일반": "https://us04web.zoom.us/j/6971690768?pwd=Vk1LWmxGRlZJTGsvVENneU12YjJpZz09",
-        "자료구조A": "https://us04web.zoom.us/j/4332940405?pwd=cHhUc2VZazVaZ2tFb2FrOGs3VzUvZz09",
-        "자료구조B": "https://us04web.zoom.us/j/4679526373",
-        "미술": "https://zoom.us/j/8448373394?pwd=L3Y4TjRtM1VWYlJxWnhRMG1SK3dOQT09",
-        "체육": "https://zoom.us/j/7760965125?pwd=cXFDREJHbmRSTWRvMENzTmZ0eTlLZz09",
-        "진로": "https://zoom.us/j/8448373394?pwd=L3Y4TjRtM1VWYlJxWnhRMG1SK3dOQT09",
-        "조회": "https://eduro.goe.go.kr/hcheck/index.jsp\nhttps://calendar.google.com/calendar/u/1/r",
-        "종례": "베네듀 안한 사람만 들어오세요\nhttps://calendar.google.com/calendar/u/1/r",
-        "진로(CA)": "https://calendar.google.com/calendar/u/1/r",
-        "동아리(CA)": "알잘딱깔센",
-        "HR": "https://calendar.google.com/calendar/u/1/r"
+        "국어": "",
+        "수학": "",
+        "통합사회": "",
+        "통합과학": "",
+        "영어(공)": "",
+        "영어(전)": "",
+        "컴퓨터시스템일반": "",
+        "자료구조A": "",
+        "자료구조B": "",
+        "미술": "",
+        "체육": "",
+        "진로": "",
+        "조회": "",
+        "종례": "",
+        "진로(CA)": "",
+        "동아리(CA)": "",
+        "HR": ""
     }
     embed = discord.Embed(color=0xed1280)
     embed.set_author(name="1학년 5반 시간표", icon_url="https://imgur.com/OjEkXk9.png")
