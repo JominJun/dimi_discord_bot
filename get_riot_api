@@ -1,0 +1,32 @@
+import requests
+
+API_KEY = "키를 발급받아서 넣어주세요"
+MAIN_URL = "https://kr.api.riotgames.com"
+HEADER = {
+    "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+    "X-Riot-Token": API_KEY,
+    "Accept-Language": "ko-KR,ko:q=0.9,en-US;q=0.8,en;q=0.7"
+}
+
+def getSummonerInfoByName(summonerName, type="id"):
+    url = f"{MAIN_URL}/lol/summoner/v4/summoners/by-name/{summonerName}"
+    req = requests.get(url=url, headers=HEADER)
+
+    if req.status_code == 200:
+        return req.json().get(type)
+    else:
+        return req.status_code
+
+def getRankInfoByName(summonerName):
+    url = f"{MAIN_URL}/lol/league/v4/entries/by-summoner/{getSummonerInfoByName(summonerName, 'id')}"
+    req = requests.get(url=url, headers=HEADER)
+
+    if req.status_code == 200:
+        leagues = req.json()
+        if len(leagues):
+            for league in leagues:
+                if league["queueType"] == "RANKED_SOLO_5x5":
+                    return league
+        return {'tier': 'UNRANKED', 'rank': ''}
+    else:
+        return req.status_code
