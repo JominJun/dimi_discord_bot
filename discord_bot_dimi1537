@@ -42,6 +42,8 @@ async def on_reaction_add(reaction, user):
 async def 명령어(ctx):
     embed = discord.Embed(color=0xed1280)
     embed.set_author(name="1537 최지혜 명령어", icon_url="https://imgur.com/Tbu3Bnm.png")
+    embed.add_field(name="✅ 기본정보", value="지혜를 소환할 때는 앞에 '~'을 붙여서 소환합니다", inline=False)
+    embed.add_field(name="🎉 유래", value="민제가 민재에 대한 반격으로 지혜라고 부르면서 난 태어났음! ~~~", inline=False)
     embed.add_field(name="~명령어", value="명령어 목록을 보여줌")
     embed.add_field(name="~롤", value="롤 관련 기능을 사용할 수 있음")
     embed.add_field(name="~시간표", value="오늘의 시간표를 확인할 수 있음")
@@ -49,9 +51,11 @@ async def 명령어(ctx):
     embed.add_field(name="~어떡할거임", value="궁금해? 궁금하면...")
     embed.add_field(name="~얼굴", value="제 얼굴은...")
     embed.add_field(name="~나는?", value="너는... 누굴까?")
+    embed.add_field(name="~지혜는?", value="비밀")
     embed.add_field(name="~청소", value="'청소 [숫자]' 입력으로 메세지를 삭제할 수 있음")
     embed.add_field(name="~도배", value="청소할 수 있다면... 도배가 균형을 이루어줘야죠")
-    embed.set_footer(text="개발자: ⭐최지혜")
+    embed.add_field(name="~ㅋ", value="ㅋㅋㅋㅋㅋ")
+    embed.set_footer(text="담당자: ⭐조민준")
     await ctx.send(embed=embed)
 
 @app.command()
@@ -62,6 +66,14 @@ async def 지혜야(ctx):
 async def 어떡할거임(ctx):
     await ctx.send("어떡할거임 ㅠㅠ")
 
+@app.command(name="ㅋ")
+async def _z(ctx):
+    await ctx.send("ㅋㅌㅌㅋㅌㅋㅋㅌㅋㅋㅋㅌㅋㅌㅋㅋㅋㅋ")
+
+@app.command(name="지혜는?")
+async def _whoami(ctx):
+    await ctx.send("양평 소녀 최지혜야 ><")
+
 @app.command()
 async def 얼굴(ctx):
     embed = discord.Embed(color=0xed1280)
@@ -69,6 +81,7 @@ async def 얼굴(ctx):
     await ctx.send(embed=embed)
 
 @app.command()
+@commands.has_permissions(administrator=True)
 async def 선고(ctx, member: discord.Member = None):
     member = member or ctx.message.author
     isAdmin = False
@@ -81,6 +94,13 @@ async def 선고(ctx, member: discord.Member = None):
         await ctx.channel.send(f"{member.mention}는 법원에서 정당한 절차를 거쳐 선고되었으며, 앞으로 '죄수' 호칭을 갖게 됩니다")
     else:
         await ctx.channel.send(f"관리자만이 선고할 수 있습니다")
+        
+@선고.error
+async def _kick_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send("{}님, 당신은 이 명령을 실행하실 권한이 없음~".format(ctx.message.author))
+    if isinstance(error, commands.BadArgument):
+        await ctx.send(f"{ctx.message.author.mention}님, 선고할 대상자를 찾지 못했음~\n띄어쓰기가 있으면 '[선고대상자]'처럼 묶어주셈~")
 
 @app.command(name="나는?")
 async def _info(ctx):
