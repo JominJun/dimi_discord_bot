@@ -1,0 +1,35 @@
+import discord, os
+from discord.ext import commands
+
+app = commands.Bot(command_prefix="뿅", status=discord.Status.online, activity=discord.Game("'뿅명령어' 대기"))
+token = os.getenv('DISCORD_BOT_DIMI1539_TOKEN')
+
+@app.event
+async def on_ready():
+    print(f"{app.user.name}({app.user.id})의 작동을 시작합니다")
+
+@app.command()
+async def 명령어(ctx):
+    embed = discord.Embed(color=0xed1280)
+    embed.set_author(name="1539 정민재 명령어", icon_url="https://imgur.com/2PAMWdC.png")
+    embed.add_field(name="✅ 기본정보", value="민재를 소환할 때는 앞에 '뿅'을 붙여서 소환합니다", inline=False)
+    embed.add_field(name="🎉 유래", value="최지예가 민제를 민재라고 부르면서 나는 탄생했어! 잘부탁해", inline=False)
+    embed.add_field(name="뿅명령어", value="명령어 목록 보여줄게")
+    embed.add_field(name="뿅민재야", value="내가 인사할테니까 받아줘")
+    embed.add_field(name="뿅망치", value="이건 개발 중이야 미안")
+    embed.set_footer(text="담당자: ⭐조민준")
+    await ctx.send(embed=embed)
+    
+@app.command()
+async def 민제야(ctx):
+    await ctx.send("난 민제가 아니라 민재인데;;")
+
+@app.command()
+async def 민재야(ctx):
+    await ctx.send("ㅎㅇ 나는 정민재라고 해 ㅎㅎ")
+
+@app.command()
+async def 망치(ctx):
+    await ctx.send("이건 개발 중이야 미안")
+
+app.run(token)
