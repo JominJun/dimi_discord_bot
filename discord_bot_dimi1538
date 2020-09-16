@@ -32,15 +32,22 @@ async def on_message(message):
 async def 명령어(ctx):
     embed = discord.Embed(color=0xed1280)
     embed.set_author(name="1538 민소현 명령어", icon_url="https://imgur.com/krJM8Wj.png")
+    embed.add_field(name="✅ 기본정보", value="소현이를 소환할 때는 앞에 '$'을 붙여서 소환합니다", inline=False)
+    embed.add_field(name="🎉 유래", value="택주쌤이...소연이를 소현이라 불러서...난 태어났어..", inline=False)
     embed.add_field(name="$명령어", value="명령어 목록을 보여줄게...ㅎ,,")
     embed.add_field(name="$소현아", value="내... 이름.. 불러줘...")
     embed.add_field(name="$도박", value="도.박. 이.거. 진.짜.재.밌.습.니.다.")
-    embed.set_footer(text="개발자: ⭐민소현")
+    embed.add_field(name="$다람쥐다!", value="... 다람쥐..?")
+    embed.set_footer(text="담당자: ⭐조민준")
     await ctx.send(embed=embed)
 
 @app.command()
 async def 소현아(ctx):
     await ctx.send("혹시,, 나..부른거야...? ...")
+
+@app.command(name="다람쥐다!")
+async def _squirrel(ctx):
+    await ctx.send("끼야아앙아아가가가각 다람쥐는 무서워!!!!! ㅠㅜㅠㅜㅠㅠㅜㅠ")
 
 @app.command()
 async def 도박(ctx):
