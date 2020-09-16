@@ -1,0 +1,21 @@
+import discord, os
+from discord.ext import commands
+
+app = commands.Bot(command_prefix="+", status=discord.Status.online, activity=discord.Game("'+명령어' 대기"))
+token = os.getenv('DISCORD_BOT_DIMI1540_TOKEN')
+
+@app.event
+async def on_ready():
+    print(f"{app.user.name}({app.user.id})의 작동을 시작합니다")
+
+@app.command()
+async def 명령어(ctx):
+    embed = discord.Embed(color=0xed1280)
+    embed.set_author(name="1540 김도헌 명령어", icon_url="https://imgur.com/6ov0O0S.png")
+    embed.add_field(name="✅ 기본정보", value="도헌이를 소환할 때는 앞에 '+'을 붙여서 소환합니다", inline=False)
+    embed.add_field(name="🎉 유래", value="성기하쌤이 김도헌이라고 부르면서 나는 탄생했어!", inline=False)
+    embed.add_field(name="+명령어", value="명령어 목록 보여줄게")
+    embed.set_footer(text="담당자: ⭐조민준")
+    await ctx.send(embed=embed)
+
+app.run(token)
